@@ -1,25 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useQuery } from "react-query";
+import { getDust, getFcst, IGetFcstResult, IGetDustResult } from "./api";
 
 function App() {
+  const { data: fcstData, isLoading: fcstIsLoading } = useQuery<IGetFcstResult>(
+    "fcst",
+    getFcst
+  );
+  const { data: dustData, isLoading: dustIsLoading } = useQuery<IGetDustResult>(
+    "dust",
+    getDust
+  );
+  console.log(fcstData, fcstIsLoading);
+  console.log(dustData, dustIsLoading);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div>{fcstData?.response.body.items.item[0].category}</div>;
+      <div>{dustData?.response.body.items[0].pm10Value}</div>;
+    </>
   );
 }
 
