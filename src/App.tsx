@@ -14,43 +14,52 @@ function App() {
     "fcst",
     getWeatherFcst
   );
+
   const { data: dustData, isLoading: dustIsLoading } = useQuery<IGetDustResult>(
     "dust",
     getDust
   );
+  const dustDataArray = dustData?.response.body.items;
   const { data: dustFcstData, isLoading: dustFcstIsLoading } =
     useQuery<IGetDustFcstResult>("dustFcst", getDustFcst);
-  console.log(fcstData, fcstIsLoading);
-  console.log(dustData, dustIsLoading);
-  console.log(dustFcstData, dustFcstIsLoading);
+  console.log("일기예보", fcstData, ", ", fcstIsLoading);
+  console.log("미세먼지", dustData, ", ", dustIsLoading);
+  console.log("먼지예보", dustFcstData, ", ", dustFcstIsLoading);
   return (
     <>
       <div>
         <h1>FcstData</h1>
-        <p>
+        <div>
           <p>{fcstData?.response.body.items.item[0].category}</p>
           <p>{fcstData?.response.body.items.item[0].baseTime}</p>
           <p>{fcstData?.response.body.items.item[0].nx}</p>
           <p>{fcstData?.response.body.items.item[0].ny}</p>
           <p>{fcstData?.response.body.items.item[0].obsrValue}</p>
-        </p>
+        </div>
       </div>
       ;
       <div>
         <h1>DustData</h1>
-        <p>
-          <p>{dustData?.response.body.items[0]?.dataTime}</p>
-          <p>{dustData?.response.body.items[0].pm10Grade}</p>
-          <p>{dustData?.response.body.items[0].pm10Grade1h}</p>
-          <p>{dustData?.response.body.items[0].pm10Value}</p>
-          <p>{dustData?.response.body.items[0].pm10Value24}</p>
-          <p> {dustData?.response.body.items[0].pm25Grade}</p>
-          <p>{dustData?.response.body.items[0].pm25Grade1h}</p>
-          <p>{dustData?.response.body.items[0].pm25Value}</p>
-          <p>{dustData?.response.body.items[0].pm25Value24}</p>
-          <p>{dustData?.response.body.items[0].khaiGrade}</p>
-          <p>{dustData?.response.body.items[0].khaiValue}</p>
-        </p>
+        <div>
+          {dustDataArray?.map((item) => (
+            <div>
+              <h1>{item.stationName}의 미세먼지 데이터</h1>
+              <p>데이터타임: {item.dataTime}</p>
+              <p>미세먼지10 등급: {item.pm10Grade}</p>
+              <p>미세먼지10 1시간 등급: {item.pm10Grade1h}</p>
+              <p>미세먼지10 값: {item.pm10Value}</p>
+              <p>미세먼지10 24시간 값: {item.pm10Value24}</p>
+              <p>미세먼지25 등급: {item.pm25Grade}</p>
+              <p>미세먼지25 1시간 등급: {item.pm25Grade1h}</p>
+              <p>미세먼지25 값: {item.pm25Value}</p>
+              <p>미세먼지25 값: {item.pm25Value24}</p>
+              <p>??: {item.khaiGrade}</p>
+              <p>??: {item.khaiValue}</p>
+              <p>측정소 이름: {item.stationName}</p>
+            </div>
+          ))}
+          ;
+        </div>
       </div>
       ;
       <div>
