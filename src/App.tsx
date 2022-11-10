@@ -19,9 +19,19 @@ function App() {
     "dust",
     getDust
   );
-  const dustDataArray = dustData?.response.body.items;
   const { data: dustFcstData, isLoading: dustFcstIsLoading } =
     useQuery<IGetDustFcstResult>("dustFcst", getDustFcst);
+
+  /**
+   * 결과값 array
+   * 1. dustDataArray = 미세먼지 결과
+   * 2. dustFcstDataArray = 미세먼지 예보 결과
+   * 3. fcstDataArray = 일기예보 결과
+   */
+  const dustDataArray = dustData?.response.body.items;
+  const dustFcstDataArray = dustFcstData?.response.body.items;
+  const fcstDataArray = fcstData?.response.body.items.item;
+
   console.log("일기예보", fcstData, ", ", fcstIsLoading);
   console.log("미세먼지", dustData, ", ", dustIsLoading);
   console.log("먼지예보", dustFcstData, ", ", dustFcstIsLoading);
@@ -30,6 +40,15 @@ function App() {
       <div>
         <h1>FcstData</h1>
         <div>
+          {fcstDataArray?.map((item) => (
+            <div>
+              <p>기본시각: {item.baseTime}</p>
+              <p>카테고리: {item.category}</p>
+              <p>nx: {item.nx}</p>
+              <p>ny: {item.ny}</p>
+              <p>관측값: {item.obsrValue}</p>
+            </div>
+          ))}
           <p>{fcstData?.response.body.items.item[0].category}</p>
           <p>{fcstData?.response.body.items.item[0].baseTime}</p>
           <p>{fcstData?.response.body.items.item[0].nx}</p>

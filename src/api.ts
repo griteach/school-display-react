@@ -42,7 +42,6 @@ interface IDust {
 
 interface IDustFcst {
   dataTime: string;
-
   informCause: string; //"○ [미세먼지] 원활한 대기 확산으로 대기 상태가 청정할 것으로 예상됩니다."
   informCode: string; // "PM10" or "PM25" or "O3"
   informData: string; //"2022-10-10" //예측을 한 날짜
@@ -78,7 +77,7 @@ export interface IGetDustFcstResult {
 
 export function getWeatherFcst() {
   return fetch(
-    `${WEATHER_PATH_BASIC}?serviceKey=${API_KEY}&pageNo=1&numOfRows=1000&dataType=JSON&base_date=20221108&base_time=1900&nx=55&ny=127`
+    `${WEATHER_PATH_BASIC}?serviceKey=${API_KEY}&pageNo=1&numOfRows=1000&dataType=JSON&base_date=20221109&base_time=1900&nx=55&ny=127`
   ).then((response) => response.json());
 }
 
@@ -92,6 +91,6 @@ export function getDust() {
 
 export function getDustFcst() {
   return fetch(
-    `${DUST_PATH_BASIC}${Frcst_URL}?serviceKey=${API_KEY}&numOfRows=100&returnType=json&searchDate=2022-10-10&InformCode=PM10`
+    `${DUST_PATH_BASIC}${Frcst_URL}?serviceKey=${API_KEY}&numOfRows=100&returnType=json&searchDate=2022-10-11&InformCode=PM10`
   ).then((response) => response.json());
 }
