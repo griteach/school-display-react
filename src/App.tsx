@@ -40,7 +40,7 @@ function App() {
       <div>
         <h1>FcstData</h1>
         <div>
-          {fcstDataArray?.map((item) => (
+          {fcstDataArray?.map((item, key) => (
             <div>
               <p>기본시각: {item.baseTime}</p>
               <p>카테고리: {item.category}</p>
@@ -60,7 +60,7 @@ function App() {
       <div>
         <h1>DustData</h1>
         <div>
-          {dustDataArray?.map((item) => (
+          {dustDataArray?.map((item, key) => (
             <div>
               <h1>{item.stationName}의 미세먼지 데이터</h1>
               <p>데이터타임: {item.dataTime}</p>

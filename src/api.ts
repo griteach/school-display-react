@@ -1,3 +1,17 @@
+import dayjs from "dayjs";
+
+/**
+ * 오늘 날짜 가져오기
+ * day.js
+ * format ㅛㅛ
+ */
+const today = dayjs().format("YYYYMMDD");
+const todayFormatDash = dayjs().format("YYYY-MM-DD");
+const currentHour = dayjs().get("hour");
+console.log(today);
+console.log(todayFormatDash);
+console.log(currentHour);
+
 const API_KEY =
   "l72zwz6RqrexXr8a4wslQsw%2Bx0zTGnE5R1sSf26aPRPOQytFjk3AkCOTfssOo1TQ8xQoimJbfkfYL6YZr%2FssIw%3D%3D";
 
@@ -77,7 +91,9 @@ export interface IGetDustFcstResult {
 
 export function getWeatherFcst() {
   return fetch(
-    `${WEATHER_PATH_BASIC}?serviceKey=${API_KEY}&pageNo=1&numOfRows=1000&dataType=JSON&base_date=20221109&base_time=1900&nx=55&ny=127`
+    `${WEATHER_PATH_BASIC}?serviceKey=${API_KEY}&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${today}&base_time=${
+      currentHour - 1
+    }00&nx=55&ny=127`
   ).then((response) => response.json());
 }
 
@@ -91,6 +107,6 @@ export function getDust() {
 
 export function getDustFcst() {
   return fetch(
-    `${DUST_PATH_BASIC}${Frcst_URL}?serviceKey=${API_KEY}&numOfRows=100&returnType=json&searchDate=2022-10-11&InformCode=PM10`
+    `${DUST_PATH_BASIC}${Frcst_URL}?serviceKey=${API_KEY}&numOfRows=100&returnType=json&searchDate=${todayFormatDash}&InformCode=PM10`
   ).then((response) => response.json());
 }
