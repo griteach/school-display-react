@@ -3,17 +3,41 @@ import dayjs from "dayjs";
 /**
  * 오늘 날짜 가져오기
  * day.js
- * format ㅛㅛ
+ * format YYYYMMDD or YYYY-MM-DD
+ * hour get(hour)-1 (결과발표 시관 관련)
  */
 const today = dayjs().format("YYYYMMDD");
 const todayFormatDash = dayjs().format("YYYY-MM-DD");
-const currentHour = dayjs().get("hour");
+const currentHour = dayjs().get("hour") - 1;
 console.log(today);
 console.log(todayFormatDash);
 console.log(currentHour);
 
+/**
+ * 현재 위치가져오기
+ */
+function getGeo() {
+  // Geolocation API에 액세스할 수 있는지를 확인
+  if (navigator.geolocation) {
+    //위치 정보를 얻기
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      console.log(pos.coords.latitude); // 위도
+      console.log(pos.coords.longitude); // 위도
+    });
+  } else {
+    alert("이 브라우저에서는 Geolocation이 지원되지 않습니다.");
+  }
+}
+
+getGeo();
+
 const API_KEY =
   "l72zwz6RqrexXr8a4wslQsw%2Bx0zTGnE5R1sSf26aPRPOQytFjk3AkCOTfssOo1TQ8xQoimJbfkfYL6YZr%2FssIw%3D%3D";
+
+//측정소 위치 찾기
+const STATION_NAME_BASIC = "http://apis.data.go.kr/B552584/MsrstnInfoInqireSvc";
+
+const TM_geo = "/getTMStdrCrdnt";
 
 //일기예보 기본 패쓰
 const WEATHER_PATH_BASIC =
@@ -92,7 +116,7 @@ export interface IGetDustFcstResult {
 export function getWeatherFcst() {
   return fetch(
     `${WEATHER_PATH_BASIC}?serviceKey=${API_KEY}&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${today}&base_time=${
-      currentHour - 1
+      currentHour < 10 ? `0` + currentHour : currentHour
     }00&nx=55&ny=127`
   ).then((response) => response.json());
 }
@@ -109,4 +133,8 @@ export function getDustFcst() {
   return fetch(
     `${DUST_PATH_BASIC}${Frcst_URL}?serviceKey=${API_KEY}&numOfRows=100&returnType=json&searchDate=${todayFormatDash}&InformCode=PM10`
   ).then((response) => response.json());
+}
+
+export function getStationNAme() {
+  return fetch(`${STATION_NAME_BASIC}${TM_geo}`);
 }
