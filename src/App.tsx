@@ -83,8 +83,16 @@ function App() {
       <div>
         <h1>DustFcstData</h1>
         <p>
-          {dustFcstData
-            ? dustFcstData?.response.body.items[0].informOverall
+          {dustFcstDataArray
+            ? dustFcstDataArray.map((item) => (
+                <div>
+                  <p>{item.informCause}</p>
+                  <p>{item.informCode}</p>
+                  <p>{item.informData}</p>
+                  <p>{item.informGrade}</p>
+                  <p>{item.informOverall}</p>
+                </div>
+              ))
             : null}
         </p>
       </div>
