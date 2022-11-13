@@ -42,7 +42,7 @@ function App() {
         <div>
           {fcstDataArray
             ? fcstDataArray?.map((item, key) => (
-                <div>
+                <div key={key}>
                   <p>기본시각: {item.baseTime}</p>
                   <p>카테고리: {item.category}</p>
                   <p>nx: {item.nx}</p>
@@ -59,7 +59,7 @@ function App() {
         <div>
           {dustDataArray
             ? dustDataArray?.map((item, key) => (
-                <div>
+                <div key={key}>
                   <h1>{item.stationName}의 미세먼지 데이터</h1>
                   <p>데이터타임: {item.dataTime}</p>
                   <p>미세먼지10 등급: {item.pm10Grade}</p>
@@ -84,8 +84,8 @@ function App() {
         <h1>DustFcstData</h1>
         <p>
           {dustFcstDataArray
-            ? dustFcstDataArray.map((item) => (
-                <div>
+            ? dustFcstDataArray.map((item, key) => (
+                <div key={key}>
                   <p>{item.informCause}</p>
                   <p>{item.informCode}</p>
                   <p>{item.informData}</p>
