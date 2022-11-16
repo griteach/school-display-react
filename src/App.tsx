@@ -82,7 +82,7 @@ function App() {
       ;
       <div>
         <h1>DustFcstData</h1>
-        <p>
+        <div>
           {dustFcstDataArray
             ? dustFcstDataArray.map((item, key) => (
                 <div key={key}>
@@ -94,7 +94,7 @@ function App() {
                 </div>
               ))
             : null}
-        </p>
+        </div>
       </div>
       ;
     </>
