@@ -7,6 +7,7 @@ import { createGlobalStyle, ThemeProvider } from "styled-components";
 import reset from "styled-reset";
 
 import App from "./App";
+import Test from "./Test";
 import { theme } from "./theme";
 
 const root = ReactDOM.createRoot(
@@ -29,7 +30,7 @@ root.render(
       <QueryClientProvider client={client}>
         <ThemeProvider theme={theme}>
           <GlobalStyle />
-          <App />
+          <Test />
         </ThemeProvider>
       </QueryClientProvider>
     </RecoilRoot>
