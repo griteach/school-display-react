@@ -17,6 +17,7 @@ console.log(currentHour);
  * 현재 위치가져오기
  */
 function getGeo() {
+  console.log("지역 탐색 시작");
   // Geolocation API에 액세스할 수 있는지를 확인
   if (navigator.geolocation) {
     //위치 정보를 얻기
@@ -30,7 +31,7 @@ function getGeo() {
 }
 
 getGeo();
-
+console.log("지역 탐색 종료");
 const API_KEY =
   "l72zwz6RqrexXr8a4wslQsw%2Bx0zTGnE5R1sSf26aPRPOQytFjk3AkCOTfssOo1TQ8xQoimJbfkfYL6YZr%2FssIw%3D%3D";
 

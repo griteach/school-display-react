@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { Router, RouterProvider } from "react-router-dom";
+
 import { RecoilRoot } from "recoil";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import reset from "styled-reset";
 
 import App from "./App";
-import Test from "./Test";
+
 import { theme } from "./theme";
 
 const root = ReactDOM.createRoot(
@@ -18,6 +18,9 @@ const GlobalStyle = createGlobalStyle`
   ${reset}
   *{
     box-sizing: border-box;
+  }
+  h1{
+    font-size: 30px;
   }
 
 `;
@@ -30,7 +33,7 @@ root.render(
       <QueryClientProvider client={client}>
         <ThemeProvider theme={theme}>
           <GlobalStyle />
-          <Test />
+          <App />
         </ThemeProvider>
       </QueryClientProvider>
     </RecoilRoot>
